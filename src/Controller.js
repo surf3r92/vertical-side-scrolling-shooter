@@ -12,23 +12,20 @@ Game.Controller = (function () {
     },
 
     create = function() {
-        game.world.setBounds(0, 0, 600, -600*20);
+        game.world.setBounds(0, 0, 800, -1000*20);
 
         meteorites = game.add.group();
-
-        for (var i = 0; i < 128; i++)
+        for (var i = 0; i < 250; i++)
         {
             meteorites.create(game.world.randomX, game.world.randomY, 'meteorite');
         }
 
         player = Game.Player.initPlayer(game);
-
         cursors = game.input.keyboard.createCursorKeys();
-
     },
 
     update = function() {
-        updatePlayer(game);
+        Game.Player.updatePlayer(cursors);
         meteorites.y += 1;
     },
 

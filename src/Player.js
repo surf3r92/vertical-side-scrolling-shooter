@@ -1,37 +1,43 @@
 Game.Player = (function () {
-    var that = {};
+    var that = {},
+        player,
 
-    initPlayer = function(game) {
-        var player = game.add.sprite(300, 300, 'player');
-        player.anchor.x = 0.5;
-        game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1);
 
-        return player;
-    },
-
-    updatePlayer = function(game) {
+    updatePlayer = function(cursors) {
         if (cursors.left.isDown)
         {
-            if (player.x > 0)
-                player.x -= 8;
+            if (player.x > player.width - 5)
+                player.x -= 6;
         }
         else if (cursors.right.isDown)
         {
-            player.x += 8;
+            if (player.x < this.game._width - player.width + 5)
+                player.x += 6;
         }
 
         if (cursors.up.isDown)
         {
-            player.y -= 8;
+            if (player.y > player.height)
+                player.y -= 6;
         }
         else if (cursors.down.isDown)
         {
-            player.y += 8;
+            if (player.y < this.game._height - player.height - 5)
+                player.y += 6;
         }
+    },
+
+    initPlayer = function(game) {
+        this.game = game;
+        player = game.add.sprite(300, 300, 'player');
+        player.anchor.x = 0.5;
+        game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1);
+
+        return player;
     };
 
 
-
+    that.updatePlayer = updatePlayer;
     that.initPlayer = initPlayer;
     return that;
 })();
