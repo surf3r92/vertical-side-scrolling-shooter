@@ -4,19 +4,23 @@ Game.Controller = (function () {
         player,
         cursors,
         starfield,
+        laser,
+        fireButton,
 
 
     preload = function() {
         game.load.image('player', 'assets/ship.png');
-        game.load.image('laser', 'assets/laser.png');
         game.load.image('starfield', 'assets/starfield.png');
+        game.load.image('laser', 'assets/laser.png');
     },
 
     create = function() {
-        Game.Environment.initEnvironment(game);
-        starfield = Game.Environment.setBackground();
+        starfield = Game.Environment.initEnvironment(game);
         player = Game.Player.initPlayer(game);
+        laser = Game.Laser.initLaser(game);
         cursors = game.input.keyboard.createCursorKeys();
+
+
     },
 
     update = function() {

@@ -25,6 +25,7 @@ Game.Player = (function () {
             if (player.y < this.game._height - player.height - 5)
                 player.y += 6;
         }
+
     },
 
     initPlayer = function(game) {
@@ -33,7 +34,6 @@ Game.Player = (function () {
         player.anchor.setTo(0.5, 0.5);
         game.physics.enable(player, Phaser.Physics.ARCADE);
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1);
-
         return player;
     };
 
