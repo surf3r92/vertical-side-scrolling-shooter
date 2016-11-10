@@ -21,34 +21,15 @@ Game.Controller = (function () {
             meteorites.create(game.world.randomX, game.world.randomY, 'meteorite');
         }
 
-        player = game.add.sprite(300, 300, 'player');
-        player.anchor.x = 0.5;
+        player = Game.Player.initPlayer(game);
 
-        game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1);
         cursors = game.input.keyboard.createCursorKeys();
 
     },
 
     update = function() {
+        updatePlayer(game);
         meteorites.y += 1;
-        if (cursors.left.isDown)
-        {
-            if (player.x > 0)
-            player.x -= 8;
-        }
-        else if (cursors.right.isDown)
-        {
-            player.x += 8;
-        }
-
-        if (cursors.up.isDown)
-        {
-            player.y -= 8;
-        }
-        else if (cursors.down.isDown)
-        {
-            player.y += 8;
-        }
     },
 
 
