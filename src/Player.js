@@ -30,7 +30,8 @@ Game.Player = (function () {
     initPlayer = function(game) {
         this.game = game;
         player = game.add.sprite(300, 300, 'player');
-        player.anchor.x = 0.5;
+        player.anchor.setTo(0.5, 0.5);
+        game.physics.enable(player, Phaser.Physics.ARCADE);
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1);
 
         return player;
