@@ -2,6 +2,7 @@ Game.Enemies = (function() {
     var that = {},
         aliens_1,
         enemies_1,
+        enemyRespawnTime = 0,
 
     _descend = function() {
 
@@ -55,6 +56,14 @@ Game.Enemies = (function() {
             Phaser.Easing.Linear.None, true, 0, 1000, true);
 
         tween.onLoop.add(_descend, this);
+        enemyRespawnTime = game.time.now;
+    },
+
+    updateEnemies = function() {
+        /*if (this.game.time.now - enemyRespawnTime > 5) {
+            _createEnemies_1(this.game);
+        }*/
+
     },
 
     initEnemies = function(game) {
@@ -68,9 +77,10 @@ Game.Enemies = (function() {
         enemies_1.enableBody = true;
         enemies_1.physicsBodyType = Phaser.Physics.ARCADE;
         _createEnemies_1(game);
-        return aliens_1;
     };
 
+
+    that.updateEnemies = updateEnemies;
     that.getEnemies_1Group = getEnemies_1Group;
     that.getAliensGroup = getAliensGroup;
     that.initEnemies = initEnemies;
