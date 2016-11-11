@@ -1,6 +1,7 @@
 Game.Player = (function () {
     var that = {},
         player,
+        fireButton,
 
 
     updatePlayer = function(cursors) {
@@ -25,15 +26,21 @@ Game.Player = (function () {
             if (player.y < this.game._height - player.height - 5)
                 player.y += 6;
         }
+
+        if (fireButton.isDown) {
+            Game.Laser.fireLaser(player);
+        }
+
     },
 
     initPlayer = function(game) {
         this.game = game;
+        fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
         player = game.add.sprite(300, 300, 'player');
         player.anchor.setTo(0.5, 0.5);
         game.physics.enable(player, Phaser.Physics.ARCADE);
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1);
-
         return player;
     };
 
