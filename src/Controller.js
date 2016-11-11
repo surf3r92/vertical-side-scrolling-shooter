@@ -8,6 +8,7 @@ Game.Controller = (function () {
         enemies_1,
         explosions_1,
         aliens,
+        players = 2,
 
 
     preload = function() {
@@ -22,7 +23,6 @@ Game.Controller = (function () {
     },
 
     create = function() {
-        var players = 2;
         Game.Environment.initEnvironment(game);
         Game.Player.initPlayer(game, players);
         Game.Laser.initLaser(game, players);

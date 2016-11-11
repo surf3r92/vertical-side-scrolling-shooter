@@ -4,10 +4,9 @@ Game.Enemies = (function() {
         enemies_1,
         enemyRespawnTime = 0,
 
+    // does not work
     _descend = function() {
-
         aliens_1.y += 10;
-
     },
 
     getAliensGroup = function() {
@@ -37,10 +36,24 @@ Game.Enemies = (function() {
 
         //  When the tween loops it calls descend
         tween.onLoop.add(_descend, this);
+        //_descend();
     },
 
     getEnemies_1Group = function() {
         return enemies_1;
+    },
+
+    _respawnEnemies_1 = function(game) {
+        for (var x = 0; x < 10; x++) {
+            var enemy_1 = enemies_1.create(x * 55, 1 * 50, 'enemy_1');
+            enemy_1.anchor.setTo(0.6, 0.6);
+            enemy_1.animations.add('fly', [ 0, 1, 2, 3 ], 20, true);
+            enemy_1.play('fly');
+        }
+        game.add.tween(enemies_1).to( { x: 300 }, 2100,
+            Phaser.Easing.Linear.None, true, 0, 1200, true);
+        enemyRespawnTime = game.time.now;
+        console.log(game.time.now);
     },
 
     _createEnemies_1 = function(game) {
@@ -51,19 +64,17 @@ Game.Enemies = (function() {
             enemy_1.play('fly');
         }
 
-
         var tween = game.add.tween(enemies_1).to( { x: 200, y: 120 }, 1300,
             Phaser.Easing.Linear.None, true, 0, 1000, true);
 
-        tween.onLoop.add(_descend, this);
+        tween.onLoop.add(_descend, enemies_1);
         enemyRespawnTime = game.time.now;
     },
 
     updateEnemies = function() {
-        /*if (this.game.time.now - enemyRespawnTime > 5) {
-            _createEnemies_1(this.game);
-        }*/
-
+        if (this.game.time.now / 1000 - enemyRespawnTime / 1000 > 5) {
+            //_respawnEnemies_1(this.game);
+        }
     },
 
     initEnemies = function(game) {
