@@ -3,14 +3,13 @@ Game.Environment = (function() {
         starfield,
 
 
-    updateEnvironment = function(cursors) {
+    updateEnvironment = function() {
         starfield.tilePosition.y += 3;
     },
 
     initEnvironment = function(game) {
         this.game = game;
         game.physics.startSystem(Phaser.Physics.Arcade)
-        game.world.setBounds(0, 0, 800, -1000*20);
         starfield = this.game.add.tileSprite(0, 0, 800, 600, 'starfield');
         return starfield;
     };
