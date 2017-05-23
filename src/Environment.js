@@ -14,7 +14,6 @@ Game.Environment = (function() {
         return starfield;
     };
 
-
     that.updateEnvironment = updateEnvironment;
     that.initEnvironment = initEnvironment;
     return that;

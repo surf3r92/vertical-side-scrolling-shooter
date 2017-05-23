@@ -15,12 +15,12 @@ var that = {},
     updatePlayer = function() {
         if (cursors_1.left.isDown)
         {
-            if (player_1.x > player_1.width - 5)
+            if (player_1.x > player_1.width/2)
                 player_1.x -= 6;
         }
         else if (cursors_1.right.isDown)
         {
-            if (player_1.x < this.game._width - player_1.width + 5)
+            if (player_1.x < this.game._width - player_1.width/2)
                 player_1.x += 6;
         }
 
@@ -31,7 +31,7 @@ var that = {},
         }
         else if (cursors_1.down.isDown)
         {
-            if (player_1.y < this.game._height - player_1.height - 5)
+            if (player_1.y < this.game._height - player_1.height+5)
                 player_1.y += 6;
         }
 
@@ -40,12 +40,12 @@ var that = {},
         }
 
         if (left_p2.isDown) {
-            if (player_2.x > player_2.width - 5)
+            if (player_2.x > player_2.width/2)
                 player_2.x -= 6;
         }
         else if (right_p2.isDown)
         {
-            if (player_2.x < this.game._width - player_2.width + 5)
+            if (player_2.x < this.game._width - player_2.width/2)
                 player_2.x += 6;
         }
         if (up_p2.isDown)
@@ -55,7 +55,7 @@ var that = {},
         }
         else if (down_p2.isDown)
         {
-            if (player_2.y < this.game._height - player_2.height - 5)
+            if (player_2.y < this.game._height - player_2.height+5)
                 player_2.y += 6;
         }
 
@@ -66,9 +66,11 @@ var that = {},
     },
 
     _initKeyControls = function(game) {
+        // Player 1
         cursors_1 = game.input.keyboard.createCursorKeys();
         fireButton_p1 = game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
 
+        // Player 2
         left_p2 = game.input.keyboard.addKey(Phaser.Keyboard.A);
         right_p2 = game.input.keyboard.addKey(Phaser.Keyboard.D);
         up_p2 = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -76,31 +78,42 @@ var that = {},
         fireButton_p2 = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     },
 
+
+    getPlayer1 = function() {
+        return player_1;
+    },
+
+    getPlayer2 = function() {
+        return player_2;
+    },
+
     initPlayer = function(game, players) {
         this.game = game;
         _initKeyControls(game);
 
         switch (players) {
-            case 1:     player_1 = game.add.sprite(300, 300, 'player_1');
+            case 1:
+                player_1 = game.add.sprite(300, 300, 'player_1');
                 player_1.anchor.setTo(0.5, 0.5);
                 game.physics.enable(player_1, Phaser.Physics.ARCADE);
                 game.camera.follow(player_1, Phaser.Camera.FOLLOW_LOCKON, 0.1);
                 break;
 
-            case 2:     player_1 = game.add.sprite(500, 300, 'player_1');
+            case 2:
+                player_1 = game.add.sprite(500, 300, 'player_1');
                 player_1.anchor.setTo(0.5, 0.5);
                 game.physics.enable(player_1, Phaser.Physics.ARCADE);
-                game.camera.follow(player_1, Phaser.Camera.FOLLOW_LOCKON, 0.1);
 
                 player_2 = game.add.sprite(300, 300, 'player_2');
                 player_2.anchor.setTo(0.5, 0.5);
                 game.physics.enable(player_2, Phaser.Physics.ARCADE);
-                game.camera.follow(player_2, Phaser.Camera.FOLLOW_LOCKON, 0.1);
                 break;
         }
     };
 
 
+    that.getPlayer1 = getPlayer1;
+    that.getPlayer2 = getPlayer2;
     that.updatePlayer = updatePlayer;
     that.initPlayer = initPlayer;
     return that;
